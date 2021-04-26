@@ -1,0 +1,131 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4><b>Venta de Pasajes</b></h4>        
+                </div>
+                <div class="card-body">
+                        <form [formGroup]="formularioVenta" (ngSubmit)="onSubmit()">
+
+                            <div class="form-group row">
+                            <label for="dni" class="col-sm-4 col-form-label">Dni Pasajero </label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="dni" name="dni" formControlName="dni">
+                            </div>
+                            </div>              
+
+                            <div class="form-group row">
+                            <label for="precio" class="col-sm-4 col-form-label">Precio Pasaje</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="precio" name="precio" formControlName="precio" required>
+                            </div>
+                            </div>            
+
+                            <div class="form-group row">
+                                <label for="categoria" class="col-sm-4 col-form-label">Categoria Pasajero</label>
+                                <!--<input type="text" class="form-control" id="categoria" name="categoria" ngModel>-->
+                                <!--<select class="form-control" id="categoria" name="categoria" formCotrolName="venta.categoria" (change)="changeCat($event)"> -->
+                                <div class="col-sm-6">
+                                    <select class="form-control" id="categoria" name="categoria" formControlName="categoria">
+                                        <option value="m">Menor</option>
+                                        <option value="a">Adulto</option>
+                                        <option value="j">Jubilado</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            
+                            <!--<div class="form-group">
+                                <div class="input-group">
+                                    <label for="fecha" class="col-sm-4 col-form-label">Fecha</label>
+                                        <input class="form-control" placeholder="dd-mm-yyyy" id="fecha" name="fecha" formControlName="fecha" ngbDatepicker #d="ngbDatepicker">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                                        </div>
+                                </div>
+                            </div>-->
+
+                            <div class="form-group row">
+                                <label for="fecha" class="col-sm-4 col-form-label">Fecha</label>
+                                <div class="col-sm-6">
+                                    <input type="date" class="form-control" id="fecha" name="fecha" formControlName="fecha">
+                                </div>
+                            </div>
+
+                            <div *ngIf="show" class="form-group row">
+                                <label for="total">Precio Total: ${{ precioTotal }}</label>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" >Guardar</button>
+
+                        </form>
+                </div>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="container"> 
+    <table class="table table-striped">
+        <thead>
+        <tr>
+        <th scope="col">Dni</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Categoria</th>
+        <th scope="col">Fecha</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let venta of ventas">
+                <td scope="row">{{ venta.dni }}</td>
+                <td> ${{ venta.precio }}</td>
+                <td>{{ venta.categoria}}</td>
+                <td>{{ venta.fecha | date: 'dd/MM/yyyy' }}</td>
+            </tr>
+        </tbody>
+    </table>
+        
+    <div class="d-flex justify-content-between p-2">
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshCountries()">
+        </ngb-pagination>
+    
+        <!--<select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshCountries()">
+        <option [ngValue]="2">2 items per page</option>
+        <option [ngValue]="4">4 items per page</option>
+        <option [ngValue]="6">6 items per page</option>
+        </select>-->
+    </div>
+
+    <table class="table table-sm table-bordered">
+        <thead>
+            <th>Categorias</th>
+            <th>Ventas</th>
+            <th>Totales</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Menor</td>
+                <td>{{ cantidadTotalm }}</td>
+                <td>{{ precioTotalm }}</td>
+            </tr>
+            <tr>
+                <td>Jubilado</td>
+                <td>{{ cantidadTotalj }}</td>
+                <td>{{ precioTotalj }}</td>
+            </tr>
+            <tr>
+                <td>Adulto</td>
+                <td>{{ cantidadTotala }}</td>
+                <td>{{ precioTotala }}</td>
+            </tr>
+            <tr class="table-dark">
+                <td>total</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
