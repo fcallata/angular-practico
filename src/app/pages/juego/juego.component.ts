@@ -18,8 +18,12 @@ const datos: Juego[] = [
   { id: 2, palabra:'mundo', vocales: 2, consonantes: 3, tamanio: 5},
   { id: 3, palabra:'argentina', vocales: 4, consonantes: 5, tamanio: 9},
   { id: 4, palabra:'jujuy', vocales: 2, consonantes: 3, tamanio: 5},
-  { id: 5, palabra:'perro', vocales: 2, consonantes: 3, tamanio: 5}
-
+  { id: 5, palabra:'gato', vocales: 2, consonantes: 2, tamanio: 4},
+  { id: 6, palabra:'perro', vocales: 2, consonantes: 3, tamanio: 5},
+  { id: 7, palabra:'sol', vocales: 1, consonantes: 2, tamanio: 3},
+  { id: 8, palabra:'futbol', vocales: 2, consonantes: 4, tamanio: 6},
+  { id: 9, palabra:'pelota', vocales: 3, consonantes: 3, tamanio: 6},
+  { id: 10, palabra:'plaza', vocales: 2, consonantes: 3, tamanio: 5}
 ]
 
 const preguntas: Pregunta[] = [

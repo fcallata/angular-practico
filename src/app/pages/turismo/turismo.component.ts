@@ -28,6 +28,9 @@ export class TurismoComponent implements OnInit {
   cantidadTotalm:number;
   cantidadTotala:number;
 
+  totalVentas: number;
+  total: number;
+
   constructor(private turismoService: TurismoService){
 
     this.formularioVenta = new FormGroup({
@@ -45,12 +48,16 @@ export class TurismoComponent implements OnInit {
     this.show = false;
     this.refreshCountries();
     this.categorias = ['m', 'j', 'a'];
+    this.precioTotal = 0;
     this.precioTotalj = 0;
     this.precioTotalm = 0;
     this.precioTotala = 0;
     this.cantidadTotalj = 0;
     this.cantidadTotalm = 0;
     this.cantidadTotala = 0;
+
+    this.totalVentas = 0;
+    this.total = 0;
   }
 
   ngOnInit(): void {
@@ -74,32 +81,32 @@ export class TurismoComponent implements OnInit {
   }
 
   onChanges(): void{
-    let precio;
-    let categoria;
+    let precio = 0;
+    let categoria = '';
 
     this.formularioVenta.get('precio').valueChanges.subscribe(val => {
       precio = val;
       this.percentOf(precio, categoria);
+      this.show = (precio != null) && (categoria != '' ) ;
     })
     
     this.formularioVenta.get('categoria').valueChanges.subscribe(val => {
       categoria = val;
       this.percentOf(precio, categoria);      
+      this.show = (precio != null) && (categoria != '' ) ;
     })
+    
   }
 
-  private percentOf(p, c){    
+  private percentOf(p: number, c: string){    
     switch (c) {
       case 'a':
-        this.show = false;
-        this.precioTotal = p;
+        this.precioTotal = p * 1;
         break;
       case 'm':
-        this.show = true;
         this.precioTotal = p - (25 * p / 100) ;
         break;
       case 'j':
-        this.show = true;
         this.precioTotal = p - (50 * p / 100);
         break;        
     }
@@ -121,6 +128,8 @@ export class TurismoComponent implements OnInit {
         this.precioTotalj = this.precioPorCategoria(c);
         break;        
     }
+    this.totalVentas = this.turismoService.ventasTotal();
+    this.total = this.turismoService.precioTotal();
   }
 
   private precioPorCategoria(cat){

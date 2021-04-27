@@ -26,8 +26,17 @@ export class TurismoService {
     return this.ventas.filter( el => el.categoria == cat).map(c => c.precio).reduce((a, b) => {return a + b });
   }
 
-  ventasPorCategoria(cat){
+  ventasPorCategoria(cat): number{
     console.log('ventasPorCategoria: ' + cat);
-    return this.ventas.filter( el => el.categoria == cat).length;
+    return this.ventas.filter( el => el.categoria === cat).length;
   }
+
+  precioTotal(): number{
+    return this.ventas.map(v => v.precio).reduce((a, b) => {return a + b });
+  }
+
+  ventasTotal(): number{
+    return this.ventas.length;
+  }
+
 }
