@@ -1,0 +1,26 @@
+.correct{
+    background-color: greenyellow;
+    color: grey;
+    text-align: center;
+    height: 60px;
+}
+
+.correct h3{
+    margin: auto;
+    padding: 10px;
+}
+
+.incorrect{
+    background-color: red;
+    color: ghostwhite;
+    text-align: center;    
+}
+
+.incorrect h3{
+    margin: auto;
+    padding: 10px;
+}
+
+.parrafo{
+    color: blue;
+}

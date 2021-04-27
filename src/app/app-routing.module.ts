@@ -7,6 +7,7 @@ import { TurismoComponent } from './pages/turismo/turismo.component';
 
 const routes: Routes = [
   { path: '' , component: NoticiasComponent },
+  { path: 'noticias' , component: NoticiasComponent },
   { path: 'juego', component: JuegoComponent},
   { path: 'turismo', component: TurismoComponent},
   { path: '**', component: NoticiasComponent}

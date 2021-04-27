@@ -1,1 +1,27 @@
-<p>juego works!</p>
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+          <h3> Cuantas <span class="parrafo">{{ parraf.parrafo | uppercase }}</span> hay en la palabra : <span class="parrafo">{{ word.palabra | uppercase }}</span></h3>
+        </div>
+      </div>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="card col-sm-6" *ngFor="let item of respuestas" (click)="onClick(item)">
+            <div class="card-body" style="text-align: center;">
+                <h1>{{item}}</h1>
+            </div>
+        </div>        
+    </div>
+    <div *ngIf="show" class="row">
+        <div class="col correct" *ngIf="correct; else elseBlock">
+            <h3>Es correcto</h3>
+        </div>
+        <ng-template #elseBlock>
+            <div class="col incorrect">
+                <h3>Es incorrecto</h3>
+            </div>        
+        </ng-template>
+    </div>
+</div>
